@@ -7,6 +7,15 @@ import Wrapper from './components/Wrapper'
 
 function App() {
   const [showInput, setShowInput] = useState(false)
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (title) =>{
+    setTodos(v => [...v, {id: (v.at(-1)?.id ?? 0) + 1, title, done: false}])
+  };
+
+  const deleteTodo = (id) =>{
+    setTodos(v => v.filter(todo => todo.id !== id))
+  };
 
   return (
     <div className="w-full min-h-screen bg-gray-200 flex flex-col items-center justify-center">
@@ -14,9 +23,9 @@ function App() {
         <Title />
         <div className="my-5 relative">
           <AddTodo setShowInput={setShowInput} showInput={showInput} />
-          {showInput && <TodoInput setShowInput={setShowInput} />}
+          {showInput && <TodoInput setShowInput={setShowInput} addTodo={addTodo} />}
         </div>
-        <TodosList />
+        <TodosList todos={todos} deleteTodo={deleteTodo} />
       </Wrapper>
     </div>
   )
