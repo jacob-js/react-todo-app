@@ -22,6 +22,11 @@ function App() {
     setTodos(v => [...v.filter(td => td.id !== id), {...todo, done: !todo.done}].sort((a, b) => a.id - b.id))
   };
 
+  const updateTodo = (id, title) =>{
+    const todo = todos.find(td => td.id === id);
+    setTodos(v => [...v.filter(td => td.id !== id), {...todo, title}].sort((a, b) => a.id - b.id))
+  };
+
   return (
     <div className="w-full min-h-screen bg-gray-200 flex flex-col items-center justify-center">
       <Wrapper>
@@ -30,7 +35,7 @@ function App() {
           <AddTodo setShowInput={setShowInput} showInput={showInput} />
           {showInput && <TodoInput setShowInput={setShowInput} addTodo={addTodo} />}
         </div>
-        <TodosList todos={todos} deleteTodo={deleteTodo} toggleTodoStatus={toggleTodoStatus} />
+        <TodosList todos={todos} deleteTodo={deleteTodo} toggleTodoStatus={toggleTodoStatus} updateTodo={updateTodo} />
       </Wrapper>
     </div>
   )

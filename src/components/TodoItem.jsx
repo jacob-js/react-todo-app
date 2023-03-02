@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 
-function TodoItem({title, done, id, deleteTodo, toggleTodoStatus}) {
+function TodoItem({title, done, id, deleteTodo, toggleTodoStatus, updateTodo}) {
+    const [editing, setEditing] = useState(false);
+    const [value, setValue] = useState(title);
+
+    const handleUpdateTitle = () =>{
+        value && updateTodo(id, value);
+        setEditing(false)
+    }
+
   return (
     <div className='flex items-center justify-between border-b border-gray-300 last:border-0 py-3'>
-        <div className={`flex gap-5 items-center cursor-pointer ${done ? 'line-through opacity-60': ''}`}>
-            <input type="checkbox" name="" id="" checked={done} onChange={() =>toggleTodoStatus(id)} />
-            <div className={`font-semibold text-xl`}>{title}</div>
+        <div className={`flex gap-5 items-center cursor-pointer ${done && !editing ? 'line-through opacity-60': ''}`}>
+            <input type="checkbox" name="st" id={id} checked={done} onChange={() =>toggleTodoStatus(id)} />
+            {
+                editing ?
+                <input type="text" className="outline-0 text-xl font-semibold bg-gray-200" value={value} onChange={e => setValue(e.target.value)} onBlur={handleUpdateTitle} autoFocus onKeyDown={e => e.key === 'Enter' && handleUpdateTitle()} />:
+                <label htmlFor={id} className='font-semibold text-xl' onDoubleClick={setEditing}>{title}</label>
+            }
         </div>
         <div className="justify-self-end cursor-pointer text-red-500" onClick={() => deleteTodo(id)}>
             <AiOutlineClose />
