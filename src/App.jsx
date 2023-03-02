@@ -2,6 +2,7 @@ import { useState } from 'react'
 import AddTodo from './components/AddTodo'
 import Title from './components/Title'
 import TodoInput from './components/TodoInput'
+import TodosList from './components/TodosList'
 import Wrapper from './components/Wrapper'
 
 function App() {
@@ -12,8 +13,10 @@ function App() {
       <Wrapper>
         <Title />
         <div className="my-5 relative">
-          {showInput ? <TodoInput setShowInput={setShowInput} />: <AddTodo setShowInput={setShowInput} />}
+          <AddTodo setShowInput={setShowInput} showInput={showInput} />
+          {showInput && <TodoInput setShowInput={setShowInput} />}
         </div>
+        <TodosList />
       </Wrapper>
     </div>
   )
