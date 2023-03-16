@@ -4,7 +4,7 @@ function TodoInput({setShowInput, addTodo}) {
   const [title, setTitle] = useState('');
 
   const handleSubmit = (e) =>{
-    if(e.key === "Enter" && title){
+    if(e.key === "Enter" && title.trim()){
       addTodo(title);
       setTitle('')
     }
