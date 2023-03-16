@@ -1,4 +1,3 @@
-import React from 'react'
 import { GoPlus } from 'react-icons/go'
 
 function AddTodo({setShowInput, showInput}) {

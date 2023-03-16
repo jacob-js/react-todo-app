@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Hints() {
 
     const HINTS = [

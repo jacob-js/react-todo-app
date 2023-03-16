@@ -1,4 +1,3 @@
-import React from 'react'
 import TodoItem from './TodoItem'
 
 function TodosList({todos, deleteTodo, toggleTodoStatus, updateTodo}) {
