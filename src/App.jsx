@@ -11,21 +11,21 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (title) =>{
-    setTodos(v => [...v, {id: (v.at(-1)?.id ?? 0) + 1, title, done: false}])
+    setTodos(prevTodods => [...prevTodods, {id: (prevTodods.at(-1)?.id ?? 0) + 1, title, done: false}])
   };
 
   const deleteTodo = (id) =>{
-    setTodos(v => v.filter(todo => todo.id !== id))
+    setTodos(prevTodods => prevTodods.filter(todo => todo.id !== id))
   };
 
   const toggleTodoStatus = (id) =>{
     const todo = todos.find(td => td.id === id);
-    setTodos(v => [...v.filter(td => td.id !== id), {...todo, done: !todo.done}].sort((a, b) => a.id - b.id))
+    setTodos(prevTodods => [...prevTodods.filter(td => td.id !== id), {...todo, done: !todo.done}].sort((a, b) => a.id - b.id))
   };
 
   const updateTodo = (id, title) =>{
     const todo = todos.find(td => td.id === id);
-    setTodos(v => [...v.filter(td => td.id !== id), {...todo, title}].sort((a, b) => a.id - b.id))
+    setTodos(prevTodods => [...prevTodods.filter(td => td.id !== id), {...todo, title}].sort((a, b) => a.id - b.id))
   };
 
   return (
